@@ -1,4 +1,4 @@
-CC=g++-8
+CC=clang++
 
 VERSION=c++17
 CFLAGS=-std=$(VERSION) -DNDEBUG #-Wno-format -Wall 

@@ -6,8 +6,8 @@
 #include <chrono>
 //https://github.com/dmitryikh/rust-vs-cpp-bench/blob/master/common/common.hpp
 // measure and return time elapsed in `job` in seconds
-template <typename JOB>
-double measure(JOB&& job) {
+template <typename func_type>
+double measure(func_type&& job) {
     std::chrono::time_point<std::chrono::high_resolution_clock> start, end;
     std::chrono::duration<double> duration = std::chrono::duration<double>::zero();
     start = std::chrono::high_resolution_clock::now();
@@ -17,9 +17,9 @@ double measure(JOB&& job) {
     return duration.count();
 }
 
-template <typename JOB>
-void measure_and_print(JOB&& job) {
-    const double m = measure(std::forward<JOB>(job));
+template <typename func_type>
+void measure_and_print(func_type&& job) {
+    const double m = measure(std::forward<func_type>(job));
     std::cerr << std::setprecision(12) << std::fixed << m << std::endl;
 }
 
