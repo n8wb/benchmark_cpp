@@ -6,7 +6,6 @@
 
 #include <iomanip>
 #include <chrono>
-//https://github.com/dmitryikh/rust-vs-cpp-bench/blob/master/common/common.hpp
 // measure and return time elapsed in `job` in seconds
 template <typename JOB>
 double measure(JOB&& job) {

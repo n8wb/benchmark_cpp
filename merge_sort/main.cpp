@@ -2,57 +2,32 @@
 #include <iostream>
 #include <queue>
 #include <algorithm>
-//#include <array>
 #include <chrono>
 #include <iomanip>
 #include <memory>
-
-template <typename JOB>
-double measure(JOB&& job) {
-    std::chrono::time_point<std::chrono::high_resolution_clock> start, end;
-    std::chrono::duration<double> duration = std::chrono::duration<double>::zero();
-    start = std::chrono::high_resolution_clock::now();
-    job();
-    end = std::chrono::high_resolution_clock::now();
-    duration += end - start;
-    return duration.count();
-}
-
-template <typename JOB>
-void measure_and_print(JOB&& job) {
-    const double m = measure(std::forward<JOB>(job));
-    std::cerr << std::setprecision(12) << std::fixed << m << std::endl;
-}
+#include "../lib/measure.h"
 
 template<typename T>
 long _merge(std::vector<T>& vec,T* tmp,const size_t left, const size_t mid, const size_t right) {
     long swap_count = 0;
-    size_t size = right - left + 1;
+    const size_t size = right - left + 1;
     size_t curl = left;
     size_t curr = mid+1;
-
-    //std::array<T,size> tmp;
-    //T* tmp = new T[size];
 
     for(size_t i = 0; i < size; i++) {
 
         if((curl <= mid) && (curr <= right)) {
             if(vec[curl] <= vec[curr]) {
-                //std::swap(vec[i+left],vec[curl++]);
                 tmp[i] = vec[curl++];
             } else {
-                //std::swap(vec[i+left],vec[curr++]);
                 tmp[i] = vec[curr++];
                 swap_count += mid - curl + 1;
             }
         } else if(curl <= mid) {
-            //std::swap(vec[i+left],vec[curl++]);
             tmp[i] = vec[curl++];
-        } else if(curr <= right) {
-            //std::swap(vec[i+left],vec[curr++]);
+        } else{
+            assert(curr <= right);
             tmp[i] = vec[curr++];
-        } else {
-            std::cerr << "What i'm doing here?" << std::endl;
         }
     }
     std::copy(tmp,&tmp[size],vec.begin()+left);
@@ -69,7 +44,7 @@ long merge_sort(std::vector<T>& vec) {
     // Merge subarrays in bottom up manner.  First merge subarrays of
     // size 1 to create sorted subarrays of size 2, then merge subarrays
     // of size 2 to create sorted subarrays of size 4, and so on.
-    //T* tmp = new T[n];
+    
     auto tmp = std::make_unique<T[]>(n);
     for (size_t curr_size = 1; curr_size <= n-1; curr_size *= 2) {
         // Pick starting point of different subarrays of current size
@@ -85,7 +60,6 @@ long merge_sort(std::vector<T>& vec) {
             swap_count += _merge(vec,tmp.get(),left_start, mid, right_end);
         }
     }
-    //delete[] tmp;
     return swap_count;
 }
 
