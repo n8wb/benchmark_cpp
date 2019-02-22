@@ -2,7 +2,7 @@ CC=clang++
 
 VERSION=c++17
 CFLAGS=-std=$(VERSION) -DNDEBUG
-CFLAGS+= -O2 -march=native
+CFLAGS+= -O3 -march=native
 CFLAGS+= -s -fno-stack-protector -fno-ident -fno-exceptions -fno-rtti -ffast-math
 #CFLAGS+= -g
 FILES=main.cpp

@@ -10,17 +10,19 @@ int binary_search(std::vector<T> const& vec, T const& value) {
     int l = 0;
     int r = static_cast<int>(vec.size() - 1);
     int i;
+    int ret(-1);
     while(l <= r) {
-        i = int((l + r) / 2);
-        if(vec[i] == value) {
-            return i + 1;
-        } else if(vec[i] > value) {
+        i = (l + r) / 2;
+        if(vec[i] > value) {
             r = i - 1;
-        } else if(vec[i] < value) {
+        }else if(vec[i] < value){
             l = i + 1;
+        }else{
+            ret = i + 1;
+            break;
         }
     }
-    return -1;
+    return ret;
 }
 
 // read number of elements, read elements into vector
