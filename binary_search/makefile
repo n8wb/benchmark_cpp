@@ -1,4 +1,4 @@
-CC=clang++
+CC=clang++-8
 
 VERSION=c++17
 CFLAGS=-std=$(VERSION) -DNDEBUG

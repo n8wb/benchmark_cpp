@@ -1,5 +1,5 @@
 #CC=g++-8
-CC=clang++
+CC=clang++-8
 VERSION=c++17
 CFLAGS=-std=$(VERSION) -DNDEBUG #-Wno-format -Wall 
 CFLAGS+= -O3 -march=native
