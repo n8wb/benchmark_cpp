@@ -1,16 +1,17 @@
 #include <iostream>
 #include <vector>
+#include <cstdint>
 
 using namespace std;
 #include "../lib/measure.h"
 // return position of the element if found (indexing from 1),
 // return -1 otherwise
 template<typename T>
-int binary_search(std::vector<T> const& vec, T const& value) {
-    int l = 0;
-    int r = static_cast<int>(vec.size() - 1);
-    int i;
-    int ret(-1);
+int32_t binary_search(std::vector<T> const& vec, T const& value) {
+    int32_t l = 0;
+    int32_t r = static_cast<int32_t>(vec.size() - 1);
+    int32_t i;
+    int32_t ret(-1);
     while(l <= r) {
         i = (l + r) / 2;
         if(vec[i] > value) {
@@ -25,17 +26,17 @@ int binary_search(std::vector<T> const& vec, T const& value) {
     return ret;
 }
 
-// read number of elements, read elements into vector
-std::vector<int> read_vec_w_num() {
+// read number of elements, read elements int32_to vector
+std::vector<int32_t> read_vec_w_num() {
     size_t n;
     std::cin >> n;
-    std::vector<int> vec(n, 0);
+    std::vector<int32_t> vec(n, 0);
     for (auto& val: vec)
         std::cin >> val;
     return vec;
 }
 
-int main(int argc, char** argv) {
+int32_t main(int32_t argc, char** argv) {
     std::ios::sync_with_stdio(false);
 
     // 1. Read the array, and values for search
@@ -43,7 +44,7 @@ int main(int argc, char** argv) {
     const auto b_vec = read_vec_w_num();
 
     // 2. Search values, write results
-    std::vector<int> res(b_vec.size());
+    std::vector<int32_t> res(b_vec.size());
     measure_and_print([&a_vec, &b_vec, &res] ()
         {
             for (size_t i = 0; i < b_vec.size(); i++)
