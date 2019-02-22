@@ -15,6 +15,13 @@ binary_search:
 	$(CC) $(CFLAGS) $(FILES) -o binary_search 
 
 fclean:
-	rm binary_search
+	rm -f binary_search
+
+gen:
+	cd ./generator;\
+	echo "10000 1000 0.5"       | go run main.go > ../inp_low;\
+	echo "1000000 100000 0.5"   | go run main.go > ../inp_mid;\
+	echo "10000000 1000000 0.5" | go run main.go > ../inp_hi;\
+	cd ..
 
 re: fclean all

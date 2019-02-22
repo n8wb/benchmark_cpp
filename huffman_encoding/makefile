@@ -18,4 +18,11 @@ huffman_encoding:
 fclean:
 	rm huffman_encoding
 
+gen:
+	cd ./generator;\
+	echo 10000    | go run main.go > ../inp_low;\
+	echo 1000000  | go run main.go > ../inp_mid;\
+	echo 10000000 | go run main.go > ../inp_hi;\
+	cd ..;
+
 re: fclean all
